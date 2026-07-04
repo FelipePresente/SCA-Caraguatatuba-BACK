@@ -1,0 +1,23 @@
+package sca.user.dto;
+
+import java.util.UUID;
+
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+public record UserUpdateDTO(
+    @Size(min = 36, max = 36, message = "User ID must be a valid UUID")
+    UUID id,
+
+    @Size(min = 4, max = 16, message = "Username must be between 4 and 16 characters")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must only contain letters and numbers, without spaces")
+    String newUsername,
+
+    @Size(min = 8, max = 64, message = "Password must be between 8 and 64 characters")
+    @Pattern(regexp = "^\\S+$", message = "Password must not contain spaces")
+    String newPassword
+) {
+    public UserUpdateDTO {
+        newUsername = newUsername == null ? null : newUsername.toLowerCase().trim();
+    }
+}
