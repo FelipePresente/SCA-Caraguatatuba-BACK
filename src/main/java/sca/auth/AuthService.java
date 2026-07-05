@@ -24,7 +24,7 @@ public class AuthService {
         User user = userRepository.findByUsername(data.username());
 
         if (user == null || !this.passwordEncoder.matches(data.password(), user.getPassword())) {
-            throw new InvalidCredentialsException("Invalid credentials");
+            throw new InvalidCredentialsException("Credenciais inválidas");
         }
 
         return this.tokenService.generateToken(user);

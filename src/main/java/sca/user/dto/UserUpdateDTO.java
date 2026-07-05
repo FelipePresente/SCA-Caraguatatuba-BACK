@@ -10,12 +10,12 @@ public record UserUpdateDTO(
     @NotNull
     UUID id,
 
-    @Size(min = 4, max = 16, message = "Username must be between 4 and 16 characters")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must only contain letters and numbers, without spaces")
+    @Size(min = 4, max = 16, message = "O nome de usuário deve ter entre 4 e 16 caracteres")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "O nome de usuário deve conter apenas letras e números, sem espaços")
     String newUsername,
 
-    @Size(min = 8, max = 64, message = "Password must be between 8 and 64 characters")
-    @Pattern(regexp = "^\\S+$", message = "Password must not contain spaces")
+    @Size(min = 8, max = 64, message = "A senha deve ter entre 8 e 64 caracteres")
+    @Pattern(regexp = "^\\S+$", message = "A senha não deve conter espaços")
     String newPassword
 ) {
     public UserUpdateDTO {

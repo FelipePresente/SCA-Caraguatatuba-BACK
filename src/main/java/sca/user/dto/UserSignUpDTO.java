@@ -5,18 +5,18 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record UserSignUpDTO(
-    @NotBlank(message = "Role must not be blank")
-    @Size(min = 4, max = 16, message = "Role must be between 4 and 16 characters")
+    @NotBlank(message = "O cargo não deve estar em branco")
+    @Size(min = 4, max = 16, message = "O cargo deve ter entre 4 e 16 caracteres")
     String role,
 
-    @NotBlank(message = "Username must not be blank")
-    @Size(min = 4, max = 16, message = "Username must be between 4 and 16 characters")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must only contain letters and numbers, without spaces")
+    @NotBlank(message = "O nome de usuário não deve estar em branco")
+    @Size(min = 4, max = 16, message = "O nome de usuário deve ter entre 4 e 16 caracteres")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "O nome de usuário deve conter apenas letras e números, sem espaços")
     String username,
 
-    @NotBlank(message = "Password must not be blank")
-    @Size(min = 8, max = 64, message = "Password must be between 8 and 64 characters")
-    @Pattern(regexp = "^\\S+$", message = "Password must not contain spaces")
+    @NotBlank(message = "A senha não deve estar em branco")
+    @Size(min = 8, max = 64, message = "A senha deve ter entre 8 e 64 caracteres")
+    @Pattern(regexp = "^\\S+$", message = "A senha não deve conter espaços")
     String password
 ) {
     public UserSignUpDTO {

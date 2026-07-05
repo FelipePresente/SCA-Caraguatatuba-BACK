@@ -28,12 +28,12 @@ public class DataInitializer implements CommandLineRunner {
             roleRepository.save(new Role("school"));
             roleRepository.save(new Role("seduc_user"));
             roleRepository.save(new Role("admin"));
-            System.out.println("Created 'school', 'seduc_user' and 'admin' roles");
+            System.out.println("Cargos 'school', 'seduc_user' e 'admin' criados");
         }
 
         if (roleRepository.findByName("admin").isPresent()) {
             Role adminRole = roleRepository.findByName("admin")
-                    .orElseThrow(() -> new RuntimeException("Role 'admin' not found"));
+                    .orElseThrow(() -> new RuntimeException("Cargo 'admin' não encontrado"));
 
             if (userRepository.findByRoleName("admin").isEmpty()) {
                 String encryptedPassword = passwordEncoder.encode("admin");
@@ -42,7 +42,7 @@ public class DataInitializer implements CommandLineRunner {
                 userRepository.save(adminUser);
             }
 
-            System.out.println("Created default admin user");
+            System.out.println("Usuário admin padrão criado");
         }
     }
 }

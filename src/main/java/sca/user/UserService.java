@@ -39,7 +39,7 @@ public class UserService {
 
     public Void create(UserSignUpDTO data) {
         if (this.userRepository.existsByUsername(data.username())) {
-            throw new ConflictException("Username already exists");
+            throw new ConflictException("Nome de usuário já existe");
         }
 
         String encryptedPassword = this.passwordEncoder.encode(data.password());
@@ -47,7 +47,7 @@ public class UserService {
         User newUser = new User(data.username(), encryptedPassword);
 
         Role role = this.roleRepository.findByName(data.role())
-                .orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cargo não encontrado"));
 
         newUser.setRole(role);
 
@@ -56,15 +56,15 @@ public class UserService {
 
     public UserResponseDTO update(UserUpdateDTO data) {
         User user = this.userRepository.findById(data.id())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
 
         if (data.newUsername() != null && !data.newUsername().isBlank()) {
             if (data.newUsername().equals(user.getUsername())) {
-                throw new InvalidCredentialsException("New username must be different");
+                throw new InvalidCredentialsException("O novo nome de usuário deve ser diferente");
             }
 
             if (this.userRepository.existsByUsername(data.newUsername())) {
-                throw new ConflictException("Username already exists");
+                throw new ConflictException("Nome de usuário já existe");
             }
 
             user.setUsername(data.newUsername());
@@ -72,12 +72,12 @@ public class UserService {
 
         if (data.newPassword() != null && !data.newPassword().isBlank()) {
             if (this.passwordEncoder.matches(data.newPassword(), user.getPassword())) {
-                throw new InvalidCredentialsException("new password must be different");
+                throw new InvalidCredentialsException("A nova senha deve ser diferente");
             }
 
             if (data.newUsername() != null && !data.newUsername().isBlank()) {
                 if (this.userRepository.existsByUsername(data.newUsername())) {
-                    throw new ConflictException("Username already exists");
+                    throw new ConflictException("Nome de usuário já existe");
                 }
 
                 user.setUsername(data.newUsername());
@@ -97,7 +97,7 @@ public class UserService {
 
     public void delete(UUID id) {
         User user = this.userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
 
         this.userRepository.delete(user);
     }

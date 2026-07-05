@@ -6,15 +6,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record ReportCreationDTO(
-    @NotNull(message = "Food ID must not be null")
+    @NotNull(message = "O ID do alimento não deve ser nulo")
     UUID foodId,
 
-    @NotNull(message = "Received kg must not be null")
-    @Positive(message = "Received kg must be positive")
+    @NotNull(message = "A quantidade recebida (kg) não deve ser nula")
+    @Positive(message = "A quantidade recebida (kg) deve ser positiva")
     Double receivedKg,
 
-    @NotNull(message = "Wasted kg must not be null")
-    @Positive(message = "Wasted kg must be positive")
+    @NotNull(message = "A quantidade desperdiçada (kg) não deve ser nula")
+    @Positive(message = "A quantidade desperdiçada (kg) deve ser positiva")
     Double wastedKg
 ) {
 }

@@ -28,7 +28,7 @@ public class FoodService {
         Food food = this.foodRepository.findByName(data.name());
 
         if (food != null) {
-            throw new ConflictException("Food already exists");
+            throw new ConflictException("Alimento já existe");
         }
 
         this.foodRepository.save(new Food(data.name(), data.price()));

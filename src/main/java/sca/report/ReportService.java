@@ -62,7 +62,7 @@ public class ReportService {
 
     public Void create(ReportCreationDTO data, User school) {
         Food food = this.foodRepository.findById(data.foodId())
-                .orElseThrow(() -> new ResourceNotFoundException("Food not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Alimento não encontrado"));
 
         Report newReport = new Report(school, food, data.receivedKg(), data.wastedKg());
 
@@ -73,7 +73,7 @@ public class ReportService {
 
     public Void delete(UUID id) {
         Report report = this.reportRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Report not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Relatório não encontrado"));
 
         this.reportRepository.delete(report);
 

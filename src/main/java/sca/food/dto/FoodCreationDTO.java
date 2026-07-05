@@ -7,13 +7,13 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 public record FoodCreationDTO(
-    @NotBlank(message = "Name must not be blank")
-    @Size(min = 4, max = 16, message = "Name must be between 4 and 16 characters")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Name must only contain letters and numbers, without spaces")
+    @NotBlank(message = "O nome não deve estar em branco")
+    @Size(min = 4, max = 16, message = "O nome deve ter entre 4 e 16 caracteres")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "O nome deve conter apenas letras e números, sem espaços")
     String name,
 
-    @NotNull(message = "Price must not be null")
-    @Positive(message = "Price must be greater than zero")
+    @NotNull(message = "O preço não deve ser nulo")
+    @Positive(message = "O preço deve ser maior que zero")
     Double price
 ) {
     public FoodCreationDTO {
