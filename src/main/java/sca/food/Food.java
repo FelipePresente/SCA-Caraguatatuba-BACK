@@ -26,7 +26,11 @@ public class Food {
     @Column(nullable = false, unique = true, length = 16)
     private String name;
 
-    public Food(String name) {
+    @Column(nullable = false, length = 10)
+    private Double price;
+
+    public Food(String name, Double price) {
         this.name = name;
+        this.price = price;
     }
 }

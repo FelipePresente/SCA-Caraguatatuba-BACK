@@ -2,11 +2,12 @@ package sca.user.dto;
 
 import java.util.UUID;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record UserUpdateDTO(
-    @Size(min = 36, max = 36, message = "User ID must be a valid UUID")
+    @NotNull
     UUID id,
 
     @Size(min = 4, max = 16, message = "Username must be between 4 and 16 characters")
