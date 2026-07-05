@@ -58,10 +58,10 @@ public class Report {
     @Column(name = "updated_at", nullable = false)
     Instant updatedAt;
 
-    public Report(User school, Food food, double receivedKg, double wastedKg) {
+    public Report(User school, Food food, Double receivedKg, Double wastedKg) {
         this.school = school;
         this.food = food;
-        this.receivedKg = receivedKg;
-        this.wastedKg = wastedKg;
+        this.receivedKg = receivedKg != null ? receivedKg : 0.0;
+        this.wastedKg = wastedKg != null ? wastedKg : 0.0;
     }
 }

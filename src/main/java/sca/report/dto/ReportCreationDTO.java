@@ -9,12 +9,15 @@ public record ReportCreationDTO(
     @NotNull(message = "O ID do alimento não deve ser nulo")
     UUID foodId,
 
-    @NotNull(message = "A quantidade recebida (kg) não deve ser nula")
     @Positive(message = "A quantidade recebida (kg) deve ser positiva")
     Double receivedKg,
 
-    @NotNull(message = "A quantidade desperdiçada (kg) não deve ser nula")
     @Positive(message = "A quantidade desperdiçada (kg) deve ser positiva")
     Double wastedKg
 ) {
+    public ReportCreationDTO {
+        if (receivedKg == null && wastedKg == null) {
+            throw new IllegalArgumentException("Deve ser fornecida a quantidade recebida ou a quantidade desperdiçada (ou ambas)");
+        }
+    }
 }

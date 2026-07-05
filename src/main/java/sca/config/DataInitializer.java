@@ -1,5 +1,9 @@
 package sca.config;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -59,25 +63,20 @@ public class DataInitializer implements CommandLineRunner {
         }
     }
 
-    // Essa função executa somente se nenhuma comida existir no banco
     public void createDefaultFood() {
-        if (this.foodRepository.count() > 0) {
-            return;
-        }
-
-        String[] foodNames = {
-                "Feijão", "Arroz", "Macarrão", "Bife", "Frango", "Peixe", "Legumes", "Fruta",
-                "Suco", "Pão", "Bolo", "Coxinha", "Pastel", "Salgado", "Refrigerante",
-                "Água", "Café", "Chá", "Leite", "Iogurte"
-        };
-        Double[] foodPrices = {
-                5.77, 6.32, 7.37, 15.43, 12.72, 13.37, 6.17, 10.22,
-                8.47, 4.12, 11.07, 9.62, 10.22, 10.87, 13.37,
-                2.17, 6.17, 5.12, 5.12, 8.47
-        };
-        for (int i = 0; i < foodNames.length; i++) {
-            this.foodRepository.save(new Food(foodNames[i], foodPrices[i]));
-            System.out.println("Comida " + foodNames[i] + " criada");
-        }
+    if (this.foodRepository.count() > 0) {
+        return;
     }
+
+    String[] foodNames = {"Feijão", "Arroz", "Macarrão", "Bife", "Frango", "Peixe", "Legumes", "Fruta", "Suco", "Pão", "Bolo", "Coxinha", "Pastel", "Salgado", "Refrigerante", "Água", "Café", "Chá", "Leite", "Iogurte"};
+    Double[] foodPrices = {5.77, 6.32, 7.37, 15.43, 12.72, 13.37, 6.17, 10.22, 8.47, 4.12, 11.07, 9.62, 10.22, 10.87, 13.37, 2.17, 6.17, 5.12, 5.12, 8.47};
+
+    List<Food> foodList = IntStream.range(0, foodNames.length)
+            .mapToObj(i -> new Food(foodNames[i], foodPrices[i]))
+            .collect(Collectors.toList());
+
+    this.foodRepository.saveAll(foodList);
+    
+    System.out.println(foodList.size() + " comidas criadas com sucesso!");
+}
 }
