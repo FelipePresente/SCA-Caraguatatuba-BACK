@@ -1,1 +1,8 @@
-application-local.properties
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+/logs/
+.DS_Store
+
+src/main/resources/application-local.properties
+src/main/resources/application-dev.properties
+secrets.properties
